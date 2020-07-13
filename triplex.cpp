@@ -1,5 +1,6 @@
 // Preprocessor Directives
 #include <iostream>
+#include <ctime>
 
 void PrintIntroduction(int Difficulty)
 {
@@ -20,9 +21,9 @@ bool PlayGame(int Difficulty)
        The variable names follow the Unreal Engine
        naming convention */
 
-    const int CodeA = 2;
-    const int CodeB = 3;
-    const int CodeC = 4;
+    const int CodeA = rand() % Difficulty + Difficulty;
+    const int CodeB = rand() % Difficulty + Difficulty;
+    const int CodeC = rand() % Difficulty + Difficulty;
     const int CodeSum = CodeA + CodeB + CodeC;
     const int CodeProduct = CodeA * CodeB * CodeC;
 
@@ -42,12 +43,12 @@ bool PlayGame(int Difficulty)
 
     if (GuessSum == CodeSum && GuessProduct == CodeProduct)
     {
-        std::cout << "You Win!\n\n";
+        std::cout << "\nWell done Sam. You cracked the code. Now move on to the next level!\n\n";
         return true;
     }
     else
     {
-        std::cout << "You entered the incorrect codes. You lose Fisher!!\n\n";
+        std::cout << "\nFisher! What the hell are you doing?. Start over and get it right already!\n\n";
         return false;
     }
 }
@@ -80,8 +81,11 @@ int main()
     std::cout << "*****************************************************" << std::endl;
 
     // Main body of the program    
+
+    srand(time(NULL));   // Creates a seed for the random funtion (new val. each time)
     int LevelDifficulty = 1;
-    while (true)
+    const int MaxDifficulty = 5;
+    while (LevelDifficulty <= MaxDifficulty)
     {
         bool bLevelComplete = PlayGame(LevelDifficulty);
         std::cin.clear();  // Clears any errors
@@ -93,7 +97,9 @@ int main()
         }
         
     }
-    
+
+    std::cout << "\nCongratulations Fisher. You passed the training. Now onto the real deal!\n";
+
     // Return Satement
     return 0;
 }
